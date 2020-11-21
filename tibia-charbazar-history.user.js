@@ -211,6 +211,28 @@ async function handleFiltersFiltersFormSubmit(evt) {
       }, '');
     resultsContainer = resultsContainer || adjacentNode.parentElement;
     resultsContainer.innerHTML = results;
+    if (!results.length) {
+      const noResults = document.createElement('p');
+      noResults.innerHTML = `
+        No results for your filtering criterias.
+        <br />
+        You can try to perform the filtering on a higher number of pages.
+        <br />
+        Example:
+        <br />
+        - <strong>Number Of Pages</strong> = 100
+        <br />
+        - <strong>Number Of Workers</strong> = 10
+        <br />
+        Notes:
+        <br />
+        - The higher the number of pages, the longer filtering results will take.
+        <br />
+        - A higher number of workers means more results pages will be processed concurently.
+      `;
+      resultsContainer.appendChild(noResults);
+    }
+
     button.removeAttribute('disabled');
   } catch (err) {
     console.error(err);
